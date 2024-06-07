@@ -16,9 +16,6 @@ import {
   WebGLRenderer,
 } from 'three'
 import WebGL from 'three/addons/capabilities/WebGL.js';
-
-
-
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -27,14 +24,16 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { NoiseShader } from './noise-shader';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
+import { animate, inView } from 'motion'
+
 const runAnimations = () => {
   // Three.js
   const loaderTag = document.querySelector('section.loader')
-  const threeTag = document.querySelector('section.three')
+  const threeTag = document.querySelector('.three')
   const {width, height} = threeTag.getBoundingClientRect()
 
   let aimEffect = 0
-  let currentEffect = 0
+  let currentEffect = 1
   let aimDirection = 0
   let currentDirection = 0
   let timeoutEffect
@@ -90,14 +89,11 @@ const runAnimations = () => {
   // Set up groups
   const loadGroup = new Group()
   const haloGroup = new Group()
-  const haloGroup2 = new Group()
   const scrollGroup = new Group()
 
   loadGroup.add(haloGroup)
-  loadGroup.add(haloGroup2)
   scrollGroup.add(loadGroup)
   scene.add(scrollGroup)
-
   
   // Create geometries
   const makeSphere = (textureFile, size) => {
@@ -113,38 +109,36 @@ const runAnimations = () => {
   }
   
   const makeHalo = () => {
-    const geometry = new TorusGeometry(50, 1, 30)
+    const geometry = new TorusGeometry(55, 1, 30)
     const material = new MeshBasicMaterial({
       color: 0xffff00
     })
     const halo = new Mesh(geometry, material)
     halo.geometry.rotateX(Math.PI / 2.25)
-
     return halo
   }
 
-  const assembleOrbit1 = () => { 
+  const assembleOrbit = () => { 
     const halo = makeHalo()
     haloGroup.add(halo)
 
     const earth = makeSphere('earth.jpg', 12)
-    earth.translateX(62)
+    earth.translateX(70)
     haloGroup.add(earth)
 
     const smiley = makeSphere('smiley.png', 10)
     smiley.getCenter
-    smiley.translateX(-60)
+    smiley.translateX(-65)
     smiley.rotateY(185)
     haloGroup.add(smiley)
 
-    const sphere3 = makeSphere('beachball.jpg', 8)
-    sphere3.translateZ(55)
-    haloGroup.add(sphere3)
+    const beachball = makeSphere('beachball.jpg', 8)
+    beachball.translateZ(55)
+    haloGroup.add(beachball)
 
-    const sphere4 = makeSphere('rainbow.jpg', 12)
-    sphere4.translateZ(-65)
-    haloGroup.add(sphere4)
-    
+    const rainbowball = makeSphere('rainbow.jpg', 12)
+    rainbowball.translateZ(-65)
+    haloGroup.add(rainbowball)
     haloGroup.translateY(80)
   }
   
@@ -156,16 +150,16 @@ const runAnimations = () => {
         child.geometry.center();
       }
     });
-    gltf.scene.scale.set(100, 100, 100)
+    gltf.scene.scale.set(120, 120, 120)
     loadGroup.add(gltf.scene)
-    assembleOrbit1()
+    assembleOrbit()
 
     document.body.classList.remove('loading')
     // gltfLoader.load('../duck.glb', (gltf) => {
-    //   gltf.scene.scale.set(25, 25, 25)
+    //   gltf.scene.scale.set(20, 20, 20)
     //   gltf.scene.translateX(35)
-    //   gltf.scene.translateZ(35)
-    //   gltf.scene.translateY(10)
+    //   gltf.scene.translateZ(40)
+    //   gltf.scene.rotateY(20)
     //   haloGroup.add(gltf.scene)
     // })
   }, 
@@ -180,7 +174,7 @@ const runAnimations = () => {
   controls.enableZoom = false
   controls.enablePan = false
   controls.autoRotate = true
-  controls.autoRotateSpeed = 5
+  controls.autoRotateSpeed = 2
 
   // Animation
   const render = () => {
@@ -191,12 +185,16 @@ const runAnimations = () => {
     // scrollGroup.rotation.set(0,window.scrollY*0.0025,0)
 
     haloGroup.rotateY(0.01)
-    // haloGroup2.rotateY(0.02)
 
-    
     // tween effect based on scroll status
-    currentDirection += (aimDirection - currentDirection) * 0.01
-    currentEffect += (aimEffect - currentEffect) * 0.05
+    const newDirection = currentDirection + (aimDirection - currentDirection) * 0.02
+    if (aimDirection !== 0) {
+      currentDirection = newDirection
+      currentEffect = Math.min(currentEffect + 0.02, 1)
+    } else {
+      currentDirection = Math.max(newDirection, 0)
+      currentEffect = Math.max(currentEffect - 0.02, 0)
+    }
 
     nosiePass.uniforms.direction.value = currentDirection
     nosiePass.uniforms.effect.value = currentEffect
@@ -230,8 +228,23 @@ const runAnimations = () => {
     }, 100)
   }
   window.addEventListener('scroll', scroll)
-
+  inView('section', (info) => {
+    if (info.target.querySelector('.content')) {
+      // animate(info.target.querySelectorAll('.content'), 
+      // )
+    }
+    if (info.target.classList.contains('left')) {
+      aimDirection = 1
+    } else if (info.target.classList.contains('right')) {
+      aimDirection = -1
+    } else {
+      aimDirection = 0
+    }
+    return (leaveInfo) => {}
+  }, {margin: '-50%'})
 }
+
+
 
 if ( WebGL.isWebGLAvailable() ) {
   runAnimations()
