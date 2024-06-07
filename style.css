@@ -34,7 +34,7 @@ body::after {
   height: calc(100vh + 300px);
   left: -300px;
   top: -300px;
-  background: url('./assets//clouds.jpg');
+  background: url('./assets/clouds.jpg');
   background-size: 300px;
   animation: scroll infinite linear reverse 10s;
   z-index: -1;
