@@ -91,13 +91,7 @@ section.center {
     position: relative;
     text-shadow: 1px 1px 24px white;
   }
-
-  img {
-    background: url('./placeholder.png');
-    padding: 24x;
-  }
 }
-
 
 .left .wrapper {
   flex-direction: row-reverse;
@@ -122,7 +116,7 @@ section.center {
   &.images {
     height: 100%;
     width: 100%;
-    background: url('./placeholder.jpg');
+    background: url('../placeholder.jpg');
     background-size: 200px;
 
     img {
