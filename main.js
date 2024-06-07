@@ -99,7 +99,7 @@ const runAnimations = () => {
   const makeSphere = (textureFile, size) => {
     const loader = new TextureLoader()
     
-    const texture = loader.load(`./assets/${textureFile}`)
+    const texture = loader.load(`../${textureFile}`)
     const geometry = new SphereGeometry(size, size, size)
     const material = new MeshLambertMaterial({
       map: texture
@@ -144,7 +144,7 @@ const runAnimations = () => {
   
   // Import models and set up scene
   const gltfLoader = new GLTFLoader()
-  gltfLoader.load('./assets/bust2.glb', (gltf) => {
+  gltfLoader.load('../bust2.glb', (gltf) => {
     gltf.scene.traverse( function ( child ) {
       if ( child.isMesh ) {
         child.geometry.center();
