@@ -34,7 +34,7 @@ body::after {
   height: calc(100vh + 300px);
   left: -300px;
   top: -300px;
-  background: url('../clouds.jpg');
+  background: url('./assets//clouds.jpg');
   background-size: 300px;
   animation: scroll infinite linear reverse 10s;
   z-index: -1;
@@ -116,7 +116,7 @@ section.center {
   &.images {
     height: 100%;
     width: 100%;
-    background: url('../placeholder.jpg');
+    background: url('./assets/placeholder.jpg');
     background-size: 200px;
 
     img {
