@@ -2,9 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   /* cursor: url('../pencil.png') 10px 10px, auto; */
-
 }
 
 @font-face {
@@ -14,66 +12,65 @@
 
 @keyframes cyclone-cursor {
   0.00% {
-    cursor: url('../cyclone3.png') 0 0, auto;
+    cursor: url('../cursor/cyclone1.png') 0 0, auto;
   }
   5.00% {
-      cursor: url('../cyclone4.png') 0 0, auto;
+      cursor: url('../cursor/cyclone2.png') 0 0, auto;
   }
   10.00% {
-      cursor: url('../cyclone5.png') 0 0, auto;
+      cursor: url('../cursor/cyclone3.png') 0 0, auto;
   }
   15.00% {
-      cursor: url('../cyclone6.png') 0 0, auto;
+      cursor: url('../cursor/cyclone4.png') 0 0, auto;
   }
   20.00% {
-      cursor: url('../cyclone7.png') 0 0, auto;
+      cursor: url('../cursor/cyclone5.png') 0 0, auto;
   }
   25.00% {
-      cursor: url('../cyclone8.png') 0 0, auto;
+      cursor: url('../cursor/cyclone6.png') 0 0, auto;
   }
   30.00% {
-      cursor: url('../cyclone9.png') 0 0, auto;
+      cursor: url('../cursor/cyclone7.png') 0 0, auto;
   }
   35.00% {
-      cursor: url('../cyclone10.png') 0 0, auto;
+      cursor: url('../cursor/cyclone8.png') 0 0, auto;
   }
   40.00% {
-      cursor: url('../cyclone11.png') 0 0, auto;
+      cursor: url('../cursor/cyclone9.png') 0 0, auto;
   }
   45.00% {
-      cursor: url('../cyclone12.png') 0 0, auto;
+      cursor: url('../cursor/cyclone10.png') 0 0, auto;
   }
   50.00% {
-      cursor: url('../cyclone13.png') 0 0, auto;
+      cursor: url('../cursor/cyclone11.png') 0 0, auto;
   }
   55.00% {
-      cursor: url('../cyclone14.png') 0 0, auto;
+      cursor: url('../cursor/cyclone12.png') 0 0, auto;
   }
   60.00% {
-      cursor: url('../cyclone15.png') 0 0, auto;
+      cursor: url('../cursor/cyclone13.png') 0 0, auto;
   }
   65.00% {
-      cursor: url('../cyclone16.png') 0 0, auto;
+      cursor: url('../cursor/cyclone14.png') 0 0, auto;
   }
   70.00% {
-      cursor: url('../cyclone17.png') 0 0, auto;
+      cursor: url('../cursor/cyclone15.png') 0 0, auto;
   }
   75.00% {
-      cursor: url('../cyclone18.png') 0 0, auto;
+      cursor: url('../cursor/cyclone16.png') 0 0, auto;
   }
   80.00% {
-      cursor: url('../cyclone19.png') 0 0, auto;
+      cursor: url('../cursor/cyclone17.png') 0 0, auto;
   }
   85.00% {
-      cursor: url('../cyclone20.png') 0 0, auto;
+      cursor: url('../cursor/cyclone18.png') 0 0, auto;
   }
   90.00% {
-      cursor: url('../cyclone21.png') 0 0, auto;
+      cursor: url('../cursor/cyclone19.png') 0 0, auto;
   }
   95.00% {
-      cursor: url('../cyclone22.png') 0 0, auto;
-  }
- 
+      cursor: url('../cursor/cyclone20.png') 0 0, auto;
+  } 
 }
 
 :root {
@@ -92,9 +89,7 @@ body {
   position: relative;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  cursor: url('../pencil.png')0 0, auto;
-
-
+  cursor: url('../cursor/pencil.png')0 0, auto;
 }
 
 body::after {
@@ -114,7 +109,6 @@ body::after {
   0% {
     transform: translateX(0);
   }
-
   100% {
     transform: translate(300px, 300px);
   }
@@ -147,7 +141,6 @@ section.center {
   }
   100% {
     filter: hue-rotate(360deg);
-
   }
 }
 
@@ -188,7 +181,7 @@ section.center {
     width: 100%;
     background: url('../placeholder.jpg');
     background-size: 200px;
-    cursor: url('../cyclone3.png') 0 0, auto;
+    cursor: url('/cursor/cyclone1.png') 0 0, auto;
     animation: cyclone-cursor infinite linear .5s;
 
 
