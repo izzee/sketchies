@@ -11,64 +11,64 @@
 }
 
 @keyframes cyclone-cursor {
-  0.00% {
+  0% {
     cursor: url('../cursor/cyclone1.png') 0 0, auto;
   }
-  5.00% {
+  5% {
       cursor: url('../cursor/cyclone2.png') 0 0, auto;
   }
-  10.00% {
+  10% {
       cursor: url('../cursor/cyclone3.png') 0 0, auto;
   }
-  15.00% {
+  15% {
       cursor: url('../cursor/cyclone4.png') 0 0, auto;
   }
-  20.00% {
+  20% {
       cursor: url('../cursor/cyclone5.png') 0 0, auto;
   }
-  25.00% {
+  25% {
       cursor: url('../cursor/cyclone6.png') 0 0, auto;
   }
-  30.00% {
+  30% {
       cursor: url('../cursor/cyclone7.png') 0 0, auto;
   }
-  35.00% {
+  35% {
       cursor: url('../cursor/cyclone8.png') 0 0, auto;
   }
-  40.00% {
+  40% {
       cursor: url('../cursor/cyclone9.png') 0 0, auto;
   }
-  45.00% {
+  45% {
       cursor: url('../cursor/cyclone10.png') 0 0, auto;
   }
-  50.00% {
+  50% {
       cursor: url('../cursor/cyclone11.png') 0 0, auto;
   }
-  55.00% {
+  55% {
       cursor: url('../cursor/cyclone12.png') 0 0, auto;
   }
-  60.00% {
+  60% {
       cursor: url('../cursor/cyclone13.png') 0 0, auto;
   }
-  65.00% {
+  65% {
       cursor: url('../cursor/cyclone14.png') 0 0, auto;
   }
-  70.00% {
+  70% {
       cursor: url('../cursor/cyclone15.png') 0 0, auto;
   }
-  75.00% {
+  75% {
       cursor: url('../cursor/cyclone16.png') 0 0, auto;
   }
-  80.00% {
+  80% {
       cursor: url('../cursor/cyclone17.png') 0 0, auto;
   }
-  85.00% {
+  85% {
       cursor: url('../cursor/cyclone18.png') 0 0, auto;
   }
-  90.00% {
+  90% {
       cursor: url('../cursor/cyclone19.png') 0 0, auto;
   }
-  95.00% {
+  95% {
       cursor: url('../cursor/cyclone20.png') 0 0, auto;
   } 
 }
@@ -115,7 +115,7 @@ body::after {
 }
 
 section {
-  margin: 100vh 0;
+  margin: 120vh 0;
   font-size: 3rem;
   height: 100vh;
   scroll-snap-align: start;
@@ -123,15 +123,15 @@ section {
 }
 
 section.center {
+  
   margin: 0;
-  z-index: 100;
   padding: 1vw;
   img {
-    filter: blur(8px);
+    z-index: 5;
+    z-index: 0;
     width: 100%;
-    height: 100%;
+    bottom: 0;
     object-fit: 100% 100%;
-    opacity: .5;
   }
 }
 
@@ -174,16 +174,16 @@ section.center {
     padding: 24px;
     opacity: .95;
     background-color: #ffffb3;
+    background-size: contain;
   }
 
   &.images {
     height: 100%;
     width: 100%;
-    background: url('../placeholder.jpg');
+    background: url('/placeholder.jpg');
     background-size: 200px;
     cursor: url('/cursor/cyclone1.png') 0 0, auto;
     animation: cyclone-cursor infinite linear .5s;
-
 
     img {
       margin: 40px;
