@@ -102,7 +102,7 @@ body {
   position: relative;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  cursor: url('../cursor/pencil.png') 0 0, auto;
+  cursor: url('../cursor/pencil.png') 30 30, auto;
 }
 
 body::after {
@@ -152,7 +152,7 @@ a {
     height: 60px;
     background-image: url('../arrowhead.svg');
     background-size: 100% 100%;
-    animation: bounce infinite alternate .5s;
+    animation: bounce infinite alternate .5s .25s;
     
   }
 
@@ -208,8 +208,10 @@ section.center {
 }
 
 .final {
+  position: relative;
+  z-index: 20;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   h1 {
     font-size: 12vw;
@@ -280,15 +282,13 @@ section.center {
     animation: cyclone-cursor infinite linear .5s;
     display: flex;
     flex-direction: column; 
-    gap: 24px;
+    justify-content: space-between;
     padding-bottom: 40px;
 
     img {
       margin: 40px;
       z-index: 10;
       height: 100%;
-      width: auto;
-      object-fit: cover;
       box-shadow: 4px 4px 24px #aaa;
       pointer-events: none;
     }
@@ -306,6 +306,12 @@ section.center {
       font-style: normal;
       text-decoration: none;
       color: #000;
+      transition: transform .25s;
+    }
+
+    a:hover {
+      filter: invert(1);
+      transform: scale(1.5);
     }
   }
 

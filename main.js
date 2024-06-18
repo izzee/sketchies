@@ -248,6 +248,10 @@ const runAnimations = () => {
     if (text) {
       animate(text, {opacity: 0, y: 200} , {duration: .25})
     }
+    if (section.classList.contains('final')) {
+      animate(section.querySelector('h1'), {filter: `blur(20px)`, opacity: 0} , {duration: .25})
+
+    }
   }
   const sections = document.querySelectorAll('section')
   sections.forEach(section => {
@@ -265,6 +269,9 @@ const runAnimations = () => {
       aimDirection = 1
     } else if (info.target.classList.contains('right')) {
       aimDirection = -1
+    } else if (info.target.classList.contains('final')) {
+      animate(info.target.querySelector('h1'), {filter: `blur(1px)`, opacity: .75} , {duration: 1})
+      aimDirection = 0
     } else {
       aimDirection = 0
     }
