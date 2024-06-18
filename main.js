@@ -29,6 +29,8 @@ import { animate, inView } from 'motion'
 const runAnimations = () => {
   // Three.js
   const loaderTag = document.querySelector('section.loader')
+  const titleTag = document.querySelector('section.title-section')
+  const imgs = document.querySelectorAll('.content.images img')
   const threeTag = document.querySelector('.three')
   const {width, height} = threeTag.getBoundingClientRect()
 
@@ -109,7 +111,7 @@ const runAnimations = () => {
   }
   
   const makeHalo = () => {
-    const geometry = new TorusGeometry(55, 1, 30)
+    const geometry = new TorusGeometry(55, 0.75, 30)
     const material = new MeshBasicMaterial({
       color: 0xffff00
     })
@@ -144,24 +146,27 @@ const runAnimations = () => {
   
   // Import models and set up scene
   const gltfLoader = new GLTFLoader()
+  const loader = new TextureLoader()
+
   gltfLoader.load('../bust2.glb', (gltf) => {
     gltf.scene.traverse( function ( child ) {
       if ( child.isMesh ) {
         child.geometry.center();
       }
     });
+
     gltf.scene.scale.set(120, 120, 120)
     loadGroup.add(gltf.scene)
     assembleOrbit()
 
     document.body.classList.remove('loading')
-    // gltfLoader.load('../duck.glb', (gltf) => {
-    //   gltf.scene.scale.set(20, 20, 20)
-    //   gltf.scene.translateX(35)
-    //   gltf.scene.translateZ(40)
-    //   gltf.scene.rotateY(20)
-    //   haloGroup.add(gltf.scene)
-    // })
+    gltfLoader.load('../duck.glb', (gltf) => {
+      gltf.scene.scale.set(20, 20, 20)
+      gltf.scene.translateX(35)
+      gltf.scene.translateZ(40)
+      gltf.scene.rotateY(20)
+      haloGroup.add(gltf.scene)
+    })
   }, 
     (xhr) => {
     }, 
@@ -227,11 +232,34 @@ const runAnimations = () => {
       aimEffect = 0
     }, 100)
   }
+
+  
   window.addEventListener('scroll', scroll)
+
+
+  const resetAnimation = (section) => {
+
+
+    const image = section.querySelector('.content.images')
+    const text = section.querySelector('.content.text')
+    if (image) {
+      animate(image, {opacity: 0, y: 200} , {duration: .25})
+    }
+    if (text) {
+      animate(text, {opacity: 0, y: 200} , {duration: .25})
+    }
+  }
+  const sections = document.querySelectorAll('section')
+  sections.forEach(section => {
+    resetAnimation(section)
+  })
+  
   inView('section', (info) => {
-    if (info.target.querySelector('.content')) {
-      // animate(info.target.querySelectorAll('.content'), 
-      // )
+    const images = info.target.querySelector('.images')
+    const text = info.target.querySelector('.text')
+    if (images && text) {
+      animate(images, {opacity: 1, y: 0} , {duration: .25, delay: .25})
+      animate(text, {opacity: 1, y: 0} , {duration: .25, delay: .5})
     }
     if (info.target.classList.contains('left')) {
       aimDirection = 1
@@ -240,8 +268,18 @@ const runAnimations = () => {
     } else {
       aimDirection = 0
     }
-    return (leaveInfo) => {}
+    return (leaveInfo) => {  
+      resetAnimation(leaveInfo.target)
+    }
   }, {margin: '-50%'})
+
+  inView('section.title-section .title-wrapper', (info) => {
+    animate(info.target, {opacity: 1}, {duration: .25, delay: .5})
+    return (leaveInfo) => {  
+      animate(leaveInfo.target, {opacity: 0}, {duration: .5 })
+    }
+  })
+
 }
 
 
@@ -250,5 +288,4 @@ if ( WebGL.isWebGLAvailable() ) {
   runAnimations()
 } else {
   document.querySelector('.error-message').style.display = 'block'
-
 }

@@ -2,8 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
   /* cursor: url('../pencil.png') 10px 10px, auto; */
 }
+
 
 @font-face {
   font-family: Mint Soda;
@@ -12,70 +14,83 @@
 
 @keyframes cyclone-cursor {
   0% {
-    cursor: url('../cursor/cyclone1.png') 0 0, auto;
+    cursor: url('../cursor/cyclone1.png') 30 30, auto;
   }
   5% {
-      cursor: url('../cursor/cyclone2.png') 0 0, auto;
+      cursor: url('../cursor/cyclone2.png') 30 30, auto;
   }
   10% {
-      cursor: url('../cursor/cyclone3.png') 0 0, auto;
+      cursor: url('../cursor/cyclone3.png') 30 30, auto;
   }
   15% {
-      cursor: url('../cursor/cyclone4.png') 0 0, auto;
+      cursor: url('../cursor/cyclone4.png') 30 30, auto;
   }
   20% {
-      cursor: url('../cursor/cyclone5.png') 0 0, auto;
+      cursor: url('../cursor/cyclone5.png') 30 30, auto;
   }
   25% {
-      cursor: url('../cursor/cyclone6.png') 0 0, auto;
+      cursor: url('../cursor/cyclone6.png') 30 30, auto;
   }
   30% {
-      cursor: url('../cursor/cyclone7.png') 0 0, auto;
+      cursor: url('../cursor/cyclone7.png') 30 30, auto;
   }
   35% {
-      cursor: url('../cursor/cyclone8.png') 0 0, auto;
+      cursor: url('../cursor/cyclone8.png') 30 30, auto;
   }
   40% {
-      cursor: url('../cursor/cyclone9.png') 0 0, auto;
+      cursor: url('../cursor/cyclone9.png') 30 30, auto;
   }
   45% {
-      cursor: url('../cursor/cyclone10.png') 0 0, auto;
+      cursor: url('../cursor/cyclone10.png') 30 30, auto;
   }
   50% {
-      cursor: url('../cursor/cyclone11.png') 0 0, auto;
+      cursor: url('../cursor/cyclone11.png') 30 30, auto;
   }
   55% {
-      cursor: url('../cursor/cyclone12.png') 0 0, auto;
+      cursor: url('../cursor/cyclone12.png') 30 30, auto;
   }
   60% {
-      cursor: url('../cursor/cyclone13.png') 0 0, auto;
+      cursor: url('../cursor/cyclone13.png') 30 30, auto;
   }
   65% {
-      cursor: url('../cursor/cyclone14.png') 0 0, auto;
+      cursor: url('../cursor/cyclone14.png') 30 30, auto;
   }
   70% {
-      cursor: url('../cursor/cyclone15.png') 0 0, auto;
+      cursor: url('../cursor/cyclone15.png') 30 30, auto;
   }
   75% {
-      cursor: url('../cursor/cyclone16.png') 0 0, auto;
+      cursor: url('../cursor/cyclone16.png') 30 30, auto;
   }
   80% {
-      cursor: url('../cursor/cyclone17.png') 0 0, auto;
+      cursor: url('../cursor/cyclone17.png') 30 30, auto;
   }
   85% {
-      cursor: url('../cursor/cyclone18.png') 0 0, auto;
+      cursor: url('../cursor/cyclone18.png') 30 30, auto;
   }
   90% {
-      cursor: url('../cursor/cyclone19.png') 0 0, auto;
+      cursor: url('../cursor/cyclone19.png') 30 30, auto;
   }
   95% {
-      cursor: url('../cursor/cyclone20.png') 0 0, auto;
+      cursor: url('../cursor/cyclone20.png') 30 30, auto;
   } 
 }
 
-:root {
-  --primary: pink;
-  --secondary: #ffffff;
+@keyframes scroll {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(300px, 300px);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(8px);
+  }
 }
 
 html {
@@ -84,12 +99,10 @@ html {
 }
 
 body {
-  background-color: var(--primary);
-  color: var(--secondary);
   position: relative;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  cursor: url('../cursor/pencil.png')0 0, auto;
+  cursor: url('../cursor/pencil.png') 0 0, auto;
 }
 
 body::after {
@@ -105,50 +118,111 @@ body::after {
   z-index: -1;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
+p {
+  user-select: none;
+}
+
+a {
+  user-select: none;
+
+  cursor: url('../cursor/link.png') 0 0, auto; 
+}
+
+.title-section {
+
+  .title-wrapper {
+    margin-right: 40px;
+    margin-left: 64px;
+    opacity: 0;
+    height: calc(100% - 100px);
+    transform: translateY(64px);
+    border-top: 4px dashed yellow;
+    border-left: 4px dashed yellow;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    box-sizing: border-box;
   }
-  100% {
-    transform: translate(300px, 300px);
+
+  .arrowhead {
+    position: absolute;
+    bottom: -16px;
+    left: -32px;
+    width: 60px;
+    height: 60px;
+    background-image: url('../arrowhead.svg');
+    background-size: 100% 100%;
+    animation: bounce infinite alternate .5s;
+    
+  }
+
+  h1 {
+    height: 72px;
+    transform: translateY(-40px);
+    font-size: 32px;
+    line-height: 1;
+    display: inline-block;
+    padding: 16px 24px;
+    border-radius: 40px;
+    color: yellow;
+    text-shadow: 0 2px black;
+    background: linear-gradient(#0000ff, #0000aa);
+    box-shadow: 0  4px 8px  #0000aa inset,  8px 8px 16px #00000033;
+    border: 4px solid yellow;
+  }
+
+  p {
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 420px;
+    color: yellow;
+    text-shadow: 0 2px #0000aa;
+    text-align: right;
+
+    a {
+      display: block;
+      color: blue;
+      text-decoration-thickness: 2.5px;
+      text-decoration-style: dashed;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 }
+
 
 section {
   margin: 120vh 0;
-  font-size: 3rem;
+  font-size: 24px;
   height: 100vh;
   scroll-snap-align: start;
-
 }
 
 section.center {
-  
   margin: 0;
-  padding: 1vw;
-  img {
-    z-index: 5;
-    z-index: 0;
-    width: 100%;
-    bottom: 0;
-    object-fit: 100% 100%;
-  }
+  z-index: 20;
 }
 
-@keyframes hue-rotate {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
+.final {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  h1 {
+    font-size: 12vw;
+    color: white;
+    text-align: center;
   }
 }
 
 .wrapper {
   height: 100%;
-  padding: 3rem;
+  padding: 32px;
   display: flex;
-  gap: 2rem;
+  gap: 32px;
   align-items: center;
   p {
     position: relative;
@@ -170,11 +244,31 @@ section.center {
 
   &.text {
     z-index: 3;
-    font-size: 32px;
+    font-size: 24px;
     padding: 24px;
     opacity: .95;
     background-color: #ffffb3;
     background-size: contain;
+
+    i {
+      display: inline-block;
+      font-style: normal;
+      transform-origin: bottom left;
+      background-color: red;
+      box-shadow: 4px 4px black;
+      color: black;
+      padding: 2px 8px;
+      margin-bottom: 24px;
+    }
+
+    a {
+      color: blue;
+      display: inline-block;
+      margin-top: 16px;
+      padding-bottom: 4px;
+      text-decoration: none;
+      border-bottom: 2px dashed;
+    }
   }
 
   &.images {
@@ -182,15 +276,36 @@ section.center {
     width: 100%;
     background: url('/placeholder.jpg');
     background-size: 200px;
-    cursor: url('/cursor/cyclone1.png') 0 0, auto;
+    cursor: url('/cursor/cyclone1.png') 30 30, auto;
     animation: cyclone-cursor infinite linear .5s;
+    display: flex;
+    flex-direction: column; 
+    gap: 24px;
+    padding-bottom: 40px;
 
     img {
       margin: 40px;
-      width: 200px;
       z-index: 10;
-      box-shadow: 4px 4px 12px #00000033;
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      box-shadow: 4px 4px 24px #aaa;
+      pointer-events: none;
+    }
 
+    a {
+      display: block;
+      padding: 24px;
+      border-radius: 100%;
+      margin: auto;
+      background: linear-gradient(#fff, #ccc);
+      box-shadow: 0 2px 4px inset #aaa, 4px 4px 12px #aaa;
+      max-width: 300px;
+      font-size: 24px;
+      text-align: center;
+      font-style: normal;
+      text-decoration: none;
+      color: #000;
     }
   }
 
@@ -218,26 +333,9 @@ section.center {
   pointer-events: none;
 }
 
-section.loader {
-  position: fixed;
-  top:0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 3;
-  background-color: var(--secondary);
-  color: var(--primary);
-  padding: 2rem;
-  font-size: 6rem;
-  display: flex;
-  align-items: end;
-}
-
 .error-message {
   font-family: Helvetica;
   padding: 20px;
-  display: none;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -245,8 +343,28 @@ section.loader {
   z-index: 10;
   color: black;
   font-size: 4vw;
+  background-color: red;
+  display: none;
 
   p {
     margin-top: 16px;
+  }
+}
+
+.mobile-error-message {
+  background-color: yellow;
+  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  color: black;
+  font-size: 4vw;
+  p {
+    margin-top: 16px;
+  }
+  @media screen and (min-width: 500px ) {
+    display: none;
   }
 }
