@@ -175,8 +175,8 @@ const runAnimations = () => {
   const mouseCoords = new Vector3(0, 0, camera.position.z)
 
   document.addEventListener("mousemove", (event) => {
-    const x = ((event.pageX) - window.innerWidth / 2) * .5
-    const y = ((event.pageY) - window.innerHeight / 2) * -.5
+    const x = ((event.clientX) - window.innerWidth / 2) * .5
+    const y = ((event.clientY) - window.innerHeight / 2) * -.5
     mouseCoords.set(camera.position.x + x, camera.position.y + y, camera.position.z)
   })
   console.log('camera', camera)
