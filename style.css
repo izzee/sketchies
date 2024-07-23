@@ -210,13 +210,16 @@ section.center {
 .final {
   position: relative;
   z-index: 20;
-  display: flex;
   align-items: center;
+  display: none; 
   justify-content: center;
   h1 {
     font-size: 12vw;
     color: white;
     text-align: center;
+  }
+  @media screen and (min-width: 500px ) {
+    display: flex;
   }
 }
 
@@ -224,8 +227,14 @@ section.center {
   height: 100%;
   padding: 32px;
   display: flex;
+  flex-direction: column-reverse;
+
   gap: 32px;
   align-items: center;
+  @media screen and (min-width: 900px ) {
+    flex-direction: row;
+  }
+
   p {
     position: relative;
     text-shadow: 1px 1px 24px white;
@@ -233,16 +242,20 @@ section.center {
 }
 
 .left .wrapper {
-  flex-direction: row-reverse;
+  @media screen and (min-width: 900px ) {
+    flex-direction: row-reverse;
+  }
 }
 
 .content {
-  flex: 1;
   color: #000;
   border-radius: 24px;
   overflow: hidden;
   background-color: #fff;
   box-shadow: 8px 8px 24px #00000033;
+  @media screen and (min-width: 900px ) {
+    flex: 1;
+  }
 
   &.text {
     z-index: 3;
@@ -358,19 +371,28 @@ section.center {
 }
 
 .mobile-error-message {
-  background-color: yellow;
+  background-color: #ffffff55;
+  backdrop-filter: blur(5px);
   padding: 20px;
   width: 100vw;
-  height: 100vh;
   position: fixed;
-  top: 0;
+  bottom: 0;
   z-index: 10;
   color: black;
-  font-size: 4vw;
+  font-size: 5vw;
+  text-align: center;
   p {
     margin-top: 16px;
   }
   @media screen and (min-width: 500px ) {
     display: none;
+  }
+}
+
+
+section {
+  display: none; 
+  @media screen and (min-width: 500px ) {
+    display: block;
   }
 }
