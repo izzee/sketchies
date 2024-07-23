@@ -14,6 +14,7 @@ import {
   TorusGeometry,
   TextureLoader,
   WebGLRenderer,
+  Vector3
 } from 'three'
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -91,16 +92,17 @@ const runAnimations = () => {
   // Set up groups
   const loadGroup = new Group()
   const haloGroup = new Group()
+  const eyeGroup = new Group()
   const scrollGroup = new Group()
 
   loadGroup.add(haloGroup)
+  loadGroup.add(eyeGroup)
   scrollGroup.add(loadGroup)
   scene.add(scrollGroup)
   
   // Create geometries
   const makeSphere = (textureFile, size) => {
     const loader = new TextureLoader()
-    
     const texture = loader.load(`../${textureFile}`)
     const geometry = new SphereGeometry(size, size, size)
     const material = new MeshLambertMaterial({
@@ -142,7 +144,42 @@ const runAnimations = () => {
     rainbowball.translateZ(-65)
     haloGroup.add(rainbowball)
     haloGroup.translateY(80)
+
+    
   }
+  
+  const addEyes = () => {
+    const leftEye = makeSphere('eye.png', 6)
+    leftEye.name = "leftEye"
+    leftEye.position.y = 65
+    leftEye.position.x = -15
+    leftEye.position.z = 36
+    eyeGroup.add(leftEye)
+
+    const rightEye = makeSphere('eye.png', 6)
+    rightEye.name = "rightEye"
+    rightEye.position.y = 65
+    rightEye.position.x = 6.5
+    rightEye.position.z = 32
+    rightEye.rotateY(.5);
+    eyeGroup.add(rightEye) 
+  }
+
+  addEyes()
+  console.log(eyeGroup)
+
+  eyeGroup.children.forEach(eye => {
+    console.log(eye.name)
+  })
+
+  const mouseCoords = new Vector3(0, 0, camera.position.z)
+
+  document.addEventListener("mousemove", (event) => {
+    const x = ((event.pageX) - window.innerWidth / 2) * .5
+    const y = ((event.pageY) - window.innerHeight / 2) * -.5
+    mouseCoords.set(camera.position.x + x, camera.position.y + y, camera.position.z)
+  })
+  console.log('camera', camera)
   
   // Import models and set up scene
   const gltfLoader = new GLTFLoader()
@@ -156,6 +193,7 @@ const runAnimations = () => {
     });
 
     gltf.scene.scale.set(120, 120, 120)
+    gltf.scene.rotateY(-1);
     loadGroup.add(gltf.scene)
     assembleOrbit()
 
@@ -178,18 +216,23 @@ const runAnimations = () => {
   const controls = new OrbitControls(camera, renderer.domElement)
   controls.enableZoom = false
   controls.enablePan = false
-  controls.autoRotate = true
-  controls.autoRotateSpeed = 2
+  // controls.autoRotate = true
+  // controls.autoRotateSpeed = 4
+
+
+
 
   // Animation
   const render = () => {
-    // autorotation of shape
-    controls.update()
+    loadGroup.rotateY(0.01)
 
-    // rotate scroll group containing shape
-    // scrollGroup.rotation.set(0,window.scrollY*0.0025,0)
 
     haloGroup.rotateY(0.01)
+
+    eyeGroup.children.forEach(eye => {
+      eye.lookAt(mouseCoords)
+    })
+
 
     // tween effect based on scroll status
     const newDirection = currentDirection + (aimDirection - currentDirection) * 0.02
