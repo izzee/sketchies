@@ -396,3 +396,14 @@ section {
     display: block;
   }
 }
+
+.main-content {
+  background-color: #ffffff33;
+  position: relative;
+}
+
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
