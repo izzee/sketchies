@@ -68,7 +68,6 @@ const runAnimations = () => {
   const outputPass = new OutputPass()
   composer.addPass(outputPass)
 
-
   // Lighting
   const ambience = new AmbientLight(0x404040)
   camera.add(ambience)
@@ -233,7 +232,6 @@ const runAnimations = () => {
       eye.lookAt(mouseCoords)
     })
 
-
     // tween effect based on scroll status
     const newDirection = currentDirection + (aimDirection - currentDirection) * 0.02
     if (aimDirection !== 0) {
@@ -276,13 +274,9 @@ const runAnimations = () => {
     }, 100)
   }
 
-  
   window.addEventListener('scroll', scroll)
 
-
   const resetAnimation = (section) => {
-
-
     const image = section.querySelector('.content.images')
     const text = section.querySelector('.content.text')
     if (image) {
@@ -329,10 +323,7 @@ const runAnimations = () => {
       animate(leaveInfo.target, {opacity: 0}, {duration: .5 })
     }
   })
-
 }
-
-
 
 if ( WebGL.isWebGLAvailable() ) {
   runAnimations()
