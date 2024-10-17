@@ -143,8 +143,6 @@ const runAnimations = () => {
     rainbowball.translateZ(-65)
     haloGroup.add(rainbowball)
     haloGroup.translateY(80)
-
-    
   }
   
   const addEyes = () => {
@@ -165,11 +163,6 @@ const runAnimations = () => {
   }
 
   addEyes()
-  console.log(eyeGroup)
-
-  eyeGroup.children.forEach(eye => {
-    console.log(eye.name)
-  })
 
   const mouseCoords = new Vector3(0, 0, camera.position.z)
 
@@ -178,7 +171,6 @@ const runAnimations = () => {
     const y = ((event.clientY) - window.innerHeight / 2) * -.5
     mouseCoords.set(camera.position.x + x, camera.position.y + y, camera.position.z)
   })
-  console.log('camera', camera)
   
   // Import models and set up scene
   const gltfLoader = new GLTFLoader()
@@ -224,8 +216,6 @@ const runAnimations = () => {
   // Animation
   const render = () => {
     loadGroup.rotateY(0.01)
-
-
     haloGroup.rotateY(0.01)
 
     eyeGroup.children.forEach(eye => {
@@ -287,7 +277,6 @@ const runAnimations = () => {
     }
     if (section.classList.contains('final')) {
       animate(section.querySelector('h1'), {filter: `blur(20px)`, opacity: 0} , {duration: .25})
-
     }
   }
   const sections = document.querySelectorAll('section')
@@ -298,19 +287,24 @@ const runAnimations = () => {
   inView('section', (info) => {
     const images = info.target.querySelector('.images')
     const text = info.target.querySelector('.text')
+    const drawingCanvas = document.querySelector('#myCanvas')
     if (images && text) {
       animate(images, {opacity: 1, y: 0} , {duration: .25, delay: .25})
       animate(text, {opacity: 1, y: 0} , {duration: .25, delay: .5})
     }
     if (info.target.classList.contains('left')) {
       aimDirection = 1
+      animate(drawingCanvas, {opacity: 1, y: 0} , {duration: 5, delay: .5})
     } else if (info.target.classList.contains('right')) {
       aimDirection = -1
+      animate(drawingCanvas, {opacity: 1, y: 0} , {duration: 5, delay: .5})
     } else if (info.target.classList.contains('final')) {
       animate(info.target.querySelector('h1'), {filter: `blur(1px)`, opacity: .75} , {duration: 1})
       aimDirection = 0
     } else {
       aimDirection = 0
+      animate(drawingCanvas, {opacity: 0, y: 0} , {duration: .25})
+
     }
     return (leaveInfo) => {  
       resetAnimation(leaveInfo.target)
@@ -324,6 +318,7 @@ const runAnimations = () => {
     }
   })
 }
+
 
 if ( WebGL.isWebGLAvailable() ) {
   runAnimations()
