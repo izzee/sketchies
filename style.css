@@ -253,9 +253,6 @@ section.center {
   overflow: hidden;
   background-color: #fff;
   box-shadow: 8px 8px 24px #00000033;
-  @media screen and (min-width: 900px ) {
-    flex: 1;
-  }
 
   &.text {
     z-index: 3;
@@ -304,6 +301,7 @@ section.center {
       height: 100%;
       box-shadow: 4px 4px 24px #aaa;
       pointer-events: none;
+      object-fit: cover;
     }
 
     a {
@@ -325,6 +323,17 @@ section.center {
     a:hover {
       filter: invert(1);
       transform: scale(1.5);
+    }
+    @media screen and (max-width: 900px ) {
+      flex: 2;
+
+      a {
+        z-index: 10;
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 
@@ -370,19 +379,21 @@ section.center {
   }
 }
 
-.mobile-error-message {
-  background-color: #ffffff55;
-  backdrop-filter: blur(5px);
+.mobile-version {
   padding: 20px;
   width: 100vw;
+  height: 100dvh;
   position: fixed;
   bottom: 0;
   z-index: 10;
-  color: black;
+  color: white;
   font-size: 5vw;
   text-align: center;
   p {
     margin-top: 16px;
+  }
+  a {
+    color: white;
   }
   @media screen and (min-width: 500px ) {
     display: none;
